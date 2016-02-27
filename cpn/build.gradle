@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+project.version = "0.8"
+project.group = "com.tengio"
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "0.8"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
+
+    testCompile 'junit:junit:4.12'
+}
+
+
+
+bintray {
+    user = BINTRAY_USER
+    key = BINTRAY_KEY
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = 'cpn'
+        userOrg = 'tengioltd'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/Tengio/cpn.git'
+        version {
+            name = '0.8'
+            desc = 'Cloud Push Notification'
+            released  = new Date()
+            vcsTag = '0.8'
+        }
+    }
+}
+
