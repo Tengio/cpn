@@ -1,3 +1,18 @@
+CPN
+===
+
+This is a small library that wraps Google Cloud Messaging solution to make it easier to implement it.
+It also add the ability to consume notification if the app is running at the moment of receiving the notification 
+without additional work.
+
+Version
+-------
+
+[ ![Download](https://api.bintray.com/packages/tengioltd/maven/cpn/images/download.svg) ](https://bintray.com/tengioltd/maven/cpn/_latestVersion)
+
+Current available version is 0.8.0 which uses Google Play Services 8.4.0
+Version follows google play services version so that it is going to ve even easier to implement.
+
 HOW TO
 ======
 

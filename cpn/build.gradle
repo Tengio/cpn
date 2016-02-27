@@ -24,9 +24,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
-
     testCompile 'junit:junit:4.12'
 }
 
@@ -42,12 +40,6 @@ bintray {
         userOrg = 'tengioltd'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/Tengio/cpn.git'
-        version {
-            name = '0.8'
-            desc = 'Cloud Push Notification'
-            released  = new Date()
-            vcsTag = '0.8'
-        }
     }
 }
 
