@@ -2,12 +2,12 @@ package com.tengio.notifications;
 
 import android.util.Log;
 
-import com.tengio.cpn.CpnRegistrationIntentService;
+import com.tengio.cpn.CpnRegistrationService;
 
-public class RegistrationIntentService extends CpnRegistrationIntentService {
+public class RegistrationService extends CpnRegistrationService {
 
-    public RegistrationIntentService() {
-        super(RegistrationIntentService.class);
+    public RegistrationService() {
+        super(RegistrationService.class);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class RegistrationIntentService extends CpnRegistrationIntentService {
     }
 
     @Override
-    protected String getToken(CpnRegistrationIntentService cpnRegistrationIntentService) {
+    protected String getToken() {
         return getString(R.string.gcm_defaultSenderId);
     }
 }

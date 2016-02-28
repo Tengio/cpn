@@ -10,8 +10,10 @@ Version
 
 [ ![Download](https://api.bintray.com/packages/tengioltd/maven/cpn/images/download.svg) ](https://bintray.com/tengioltd/maven/cpn/_latestVersion)
 
-Current available version is 0.8.0 which uses Google Play Services 8.4.0
-Version follows google play services version so that it is going to ve even easier to implement.
+Current version uses Google Play Services 8.4.0.
+
+Version will follows google play services version so that it is going to ve even easier to implement.
+
 
 HOW TO
 ======
@@ -61,15 +63,15 @@ Add Services and receiver in the AndroidManifest.xml :
 ```
 <meta-data android:name="com.google.android.gms.version"
            android:value="@integer/google_play_services_version"/>
-<receiver android:name="com.tengio.cpn.CpnGcmReceiver"
-          android:exported="true">
+<receiver android:name="com.tengio.cpn.CpnNotificationReceiver"
+          android:exported="true"
           android:permission="com.google.android.c2dm.permission.SEND">
     <intent-filter>
         <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
         <category android:name="${applicationId}"/>
     </intent-filter>
 </receiver>
-<service android:name="com.tengio.cpn.CpnInstanceIDListenerService"
+<service android:name="com.tengio.cpn.CpnInstanceIDService"
          android:exported="false">
     <intent-filter>
         <action android:name="com.google.android.gms.iid.InstanceID"/>
@@ -84,16 +86,17 @@ Google configuration file
 Go to https://developers.google.com/mobile/add get the json for you add with google messaging service enabled.
 Add Json to the app root folder.
 
-RegistrationIntentService
--------------------------
+
+RegistrationService
+-------------------
 
 Your app need to expose a registration intent service where the we can get the gcm sender id and you can send the 
 token to the server when ready.
 ```java
-public class RegistrationIntentService extends CpnRegistrationIntentService {
+public class RegistrationService extends CpnRegistrationService {
 
-    public RegistrationIntentService() {
-        super(RegistrationIntentService.class);
+    public RegistrationService() {
+        super(RegistrationService.class);
     }
 
     @Override
@@ -103,7 +106,7 @@ public class RegistrationIntentService extends CpnRegistrationIntentService {
     }
 
     @Override
-    protected String getToken(CpnRegistrationIntentService cpnRegistrationIntentService) {
+    protected String getToken() {
         return getString(R.string.gcm_defaultSenderId);
     }
 }
@@ -111,7 +114,7 @@ public class RegistrationIntentService extends CpnRegistrationIntentService {
 
 Don't forget to add the registration service to the manifest
 ```
-<service android:name=".RegistrationIntentService"
+<service android:name=".RegistrationService"
                  android:exported="false">
     <intent-filter>
         <action android:name="com.tengio.cpn.REGISTRATION_ACTION"/>
@@ -124,16 +127,16 @@ Registration service is important as it lets you register the token and send it 
 But to do that you should make sure it is started every time to make sure your app is registered.
 
 ```
-
+RegistrationIntentService.start(context);
 ```
 
  
-NotificationListenerService
----------------------------
+NotificationService
+-------------------
 
 If you want to show push notification while the app is not active :
 ```java
-public class NotificationListenerService extends CpnNotificationListenerService<PushNotification> {
+public class NotificationService extends CpnNotificationService<PushNotification> {
 
     @Override
     protected void sendNotification(PushNotification pushNotification) {
@@ -164,7 +167,7 @@ public class NotificationListenerService extends CpnNotificationListenerService<
  
 Also you need to add it to the manifest:
 ```
-<service android:name=".NotificationListenerService"
+<service android:name=".NotificationService"
          android:exported="false">
     <intent-filter>
         <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
@@ -179,12 +182,12 @@ Consume Notification in while app running
 If you want to consume notifications while app is running in an activity you can easily do that:
 
 ```
-private CpnActivityReceiver<PushNotification> cpnActivityReceiver = new CpnActivityReceiver<>();
+private CpnInAppReceiver<PushNotification> cpnReceiver = new CpnInAppReceiver<>();
 
 @Override
 protected void onResume() {
     super.onResume();
-    cpnActivityReceiver.register(this, new CpnInAppListener<PushNotification>() {
+    cpnReceiver.register(this, new CpnInAppListener<PushNotification>() {
         @Override
         public void onReceived(PushNotification notification) {
             message.setText(notification.getMessage());
@@ -194,7 +197,7 @@ protected void onResume() {
 
 @Override
 protected void onPause() {
-    cpnActivityReceiver.unregister(this);
+    cpnReceiver.unregister(this);
     super.onPause();
 }
 ```

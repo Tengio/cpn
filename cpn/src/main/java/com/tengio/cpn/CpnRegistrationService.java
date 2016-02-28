@@ -11,14 +11,14 @@ import android.preference.PreferenceManager;
 
 import java.io.IOException;
 
-public abstract class CpnRegistrationIntentService extends IntentService {
+public abstract class CpnRegistrationService extends IntentService {
 
     public static final String CPN_REGISTRATION_ACTION = "com.tengio.cpn.REGISTRATION_ACTION";
     private static final String TOKEN = "push_token";
     private static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     private static final String LOCK = "";
 
-    public CpnRegistrationIntentService(Class<? extends  CpnRegistrationIntentService> clazz) {
+    public CpnRegistrationService(Class<? extends CpnRegistrationService> clazz) {
         super(clazz.getSimpleName());
     }
 
@@ -30,7 +30,7 @@ public abstract class CpnRegistrationIntentService extends IntentService {
 
     public static String getGcmToken(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString(CpnRegistrationIntentService.TOKEN, null);
+        return sharedPreferences.getString(CpnRegistrationService.TOKEN, null);
     }
 
     public static boolean isGcmAlreadyRegistered(Context context) {
@@ -44,7 +44,7 @@ public abstract class CpnRegistrationIntentService extends IntentService {
         try {
             synchronized (LOCK) {
                 InstanceID instanceID = InstanceID.getInstance(this);
-                String token = instanceID.getToken(getToken(this), GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+                String token = instanceID.getToken(getToken(), GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
                 boolean alreadyRegistered = isGcmAlreadyRegistered(this);
                 final SharedPreferences.Editor editor = preference.edit();
                 editor.putBoolean(SENT_TOKEN_TO_SERVER, true);
@@ -59,5 +59,5 @@ public abstract class CpnRegistrationIntentService extends IntentService {
 
     protected abstract void onTokenReady(String token, boolean alreadyRegistered);
 
-    protected abstract String getToken(CpnRegistrationIntentService cpnRegistrationIntentService);
+    protected abstract String getToken();
 }

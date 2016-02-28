@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.tengio.cpn.CpnActivityReceiver;
+import com.tengio.cpn.CpnInAppReceiver;
 import com.tengio.cpn.CpnInAppListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CpnActivityReceiver<PushNotification> cpnActivityReceiver = new CpnActivityReceiver<>();
+    private CpnInAppReceiver<PushNotification> cpnActivityReceiver = new CpnInAppReceiver<>();
     private TextView message;
 
     @Override
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         message = (TextView) findViewById(R.id.notification_message);
 
         //TODO using this to register the
-        RegistrationIntentService.start(this);
+        RegistrationService.start(this);
     }
 
     @Override

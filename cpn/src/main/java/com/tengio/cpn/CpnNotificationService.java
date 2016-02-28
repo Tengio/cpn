@@ -9,7 +9,7 @@ import android.support.v4.content.LocalBroadcastManager;
 
 import java.io.Serializable;
 
-public abstract class CpnNotificationListenerService<T extends Serializable> extends GcmListenerService {
+public abstract class CpnNotificationService<T extends Serializable> extends GcmListenerService {
 
     public static final String NOTIFICATION_OBJECT = "NotificationObject";
     public static final String NOTIFICATION_RECEIVED = "com.cpn.action.NOTIFICATION_RECEIVED";

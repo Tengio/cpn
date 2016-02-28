@@ -9,9 +9,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
-import com.tengio.cpn.CpnNotificationListenerService;
+import com.tengio.cpn.CpnNotificationService;
 
-public class NotificationListenerService extends CpnNotificationListenerService<PushNotification> {
+public class NotificationService extends CpnNotificationService<PushNotification> {
 
     @Override
     protected void sendNotification(PushNotification pushNotification) {

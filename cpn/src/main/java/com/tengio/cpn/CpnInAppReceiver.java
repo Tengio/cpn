@@ -8,7 +8,7 @@ import android.util.Log;
 
 import java.io.Serializable;
 
-public class CpnActivityReceiver<T extends Serializable> {
+public class CpnInAppReceiver<T extends Serializable> {
 
     private BroadcastReceiver receiver;
 
@@ -16,7 +16,7 @@ public class CpnActivityReceiver<T extends Serializable> {
         receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Object obj = intent.getSerializableExtra(CpnNotificationListenerService.NOTIFICATION_OBJECT);
+                Object obj = intent.getSerializableExtra(CpnNotificationService.NOTIFICATION_OBJECT);
                 if (obj == null) {
                     return;
                 }
@@ -27,7 +27,7 @@ public class CpnActivityReceiver<T extends Serializable> {
                 }
             }
         };
-        LocalBroadcastManager.getInstance(context).registerReceiver(receiver, CpnNotificationListenerService.INTENT_FILTER);
+        LocalBroadcastManager.getInstance(context).registerReceiver(receiver, CpnNotificationService.INTENT_FILTER);
     }
 
     public void unregister(Context context) {
