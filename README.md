@@ -217,16 +217,29 @@ if you need to pass key/value pair to the bundle you can use things like this:
 ```
 -e collapse_key "ACTION_BOUND_TO_TABLE"
 ```
+example:
+
+```
+adb shell am broadcast -c com.adzuna.debug -a com.google.android.c2dm.intent.RECEIVE -e context "jobs" -e id "6439443" -e message "hello" --ei new_count 324
+```
 
 How to test Google Cloud Messaging
 ----------------------------------
 
-if you wand to test the implementation with by receiving real push notification try this curl command:
+if you want to test the implementation with by receiving real push notification try this curl command:
 
 ```
 curl --header "Authorization: key=AIzaSyAXdTTj4DSGfvm94CC66tXSH1OSRjL3UyQ" --header "Content-Type: application/json" 
     https://android.googleapis.com/gcm/send -d 
     "{\"registration_ids\":[\"fyfUV30o3CU:APA91bFZMO-HJxoX-y-VbKnesMrEkd02Hk2cIkuIMR45QtJoy5jiD1mEaJgBkqWhP5Scq3pkbo2jGZRlpiYIAO6RXS2XNxmGKs1aAnj6hnCBwyXzLfLjozbXlvYBvJGtsF229pVyR1OY\"]}"
+```
+
+real push with parameters:
+
+```
+curl --header "Authorization: key=AIzaSyDCCPu_DhK8QkgZ6kCU0xvQK6-YECC0Yzg" --header "Content-Type: application/json"
+https://android.googleapis.com/gcm/send -d  
+"{\"registration_ids\":[\"dgapK87n1oc:APA91bERPFkHTY0sYDpsoncFUFBwDqnFSFapXaSch-3prWOUy3IPcWAdP0YadzurJ8R0sSLObH_U4tsnToFVc6FDjjymjgsF9Xbts6ML8PFzuI0W2dLRgSWVM9fy5Z7DAA5TR_iUuZ9F\"], \"data\":{\"message\":\"You have 10 new jobs…..\", \"new_count\":3, \"context\":\"jobs\", \"id\": 6439443}}"
 ```
 
 Library updates
