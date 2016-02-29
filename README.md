@@ -24,7 +24,7 @@ Dependencies
 ```
 dependencies {
     ...
-    compile 'com.tengio.cpn:0.8.0'
+    compile 'com.tengio:cpn:latest_version'
 }
 ```
 
@@ -227,6 +227,16 @@ if you wand to test the implementation with by receiving real push notification 
 curl --header "Authorization: key=AIzaSyAXdTTj4DSGfvm94CC66tXSH1OSRjL3UyQ" --header "Content-Type: application/json" 
     https://android.googleapis.com/gcm/send -d 
     "{\"registration_ids\":[\"fyfUV30o3CU:APA91bFZMO-HJxoX-y-VbKnesMrEkd02Hk2cIkuIMR45QtJoy5jiD1mEaJgBkqWhP5Scq3pkbo2jGZRlpiYIAO6RXS2XNxmGKs1aAnj6hnCBwyXzLfLjozbXlvYBvJGtsF229pVyR1OY\"]}"
+```
+
+Library updates
+---------------
+
+We use bintray to deploy changes to jcenter. To deploy a new version make sure to define BINTRAY_USER and BINTRAY_KEY
+ variables. Then run:
+ 
+```
+gradle bintrayUpload
 ```
 
 
