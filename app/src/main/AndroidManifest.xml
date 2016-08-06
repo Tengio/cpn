@@ -6,9 +6,9 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <permission android:name="com.tengio.notifications.permission.C2D_MESSAGE"
+    <permission android:name="${applicationId}.permission.C2D_MESSAGE"
                 android:protectionLevel="signature"/>
-    <uses-permission android:name="com.tengio.notifications.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE"/>
 
     <application android:allowBackup="true"
                  android:icon="@mipmap/ic_launcher"

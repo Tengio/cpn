@@ -54,9 +54,9 @@ Android manifest
 
 First you need to add permissions :
 ```
-<permission android:name="com.bpl.lpq.permission.C2D_MESSAGE"
+<permission android:name="${applicationId}.permission.C2D_MESSAGE"
             android:protectionLevel="signature"/>
-<uses-permission android:name="com.bpl.lpq.permission.C2D_MESSAGE"/>
+<uses-permission android:name="${applicationId}.permission.C2D_MESSAGE"/>
 ```
 
 Add Services and receiver in the AndroidManifest.xml :
