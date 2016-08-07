@@ -10,9 +10,32 @@ Version
 
 [ ![Download](https://api.bintray.com/packages/tengioltd/maven/cpn/images/download.svg) ](https://bintray.com/tengioltd/maven/cpn/_latestVersion)
 
-Current version uses Google Play Services 8.4.0.
+Current version uses Google Play Services 9.2.1.
 
 Version will follows google play services version so that it is going to ve even easier to implement.
+
+
+Change Log:
+-----------
+
+9.2.1 :
+
+- Look like there is there is a new field in the google services json file :
+```
+"api_key": [ { "current_key": "" } ]
+```
+without you get "Missing api_key/current key with Google Services 3.0.0"
+- firebase is added by google play services, this add more dependencies which may require you to add multiDex support
+```
+defaultConfig {
+    multiDexEnabled true
+}
+```
+- note play service 3.0.0 force you to use firebase 9.0.0. To avoid duplication with 9.2.1, cpn library manually add firebase 9.2.1.
+
+8.4.0 :
+
+- 8.4.0 Google Play Services 8.4.0.
 
 
 HOW TO
@@ -220,7 +243,7 @@ if you need to pass key/value pair to the bundle you can use things like this:
 example:
 
 ```
-adb shell am broadcast -c com.adzuna.debug -a com.google.android.c2dm.intent.RECEIVE -e context "jobs" -e id "6439443" -e message "hello" --ei new_count 324
+adb shell am broadcast -c com.tengio.notifications -a com.google.android.c2dm.intent.RECEIVE -e context "jobs" -e id "6439443" -e message "hello" --ei new_count 324
 ```
 
 How to test Google Cloud Messaging
@@ -229,15 +252,13 @@ How to test Google Cloud Messaging
 if you want to test the implementation with by receiving real push notification try this curl command:
 
 ```
-curl --header "Authorization: key=AIzaSyAXdTTj4DSGfvm94CC66tXSH1OSRjL3UyQ" --header "Content-Type: application/json" 
-    https://android.googleapis.com/gcm/send -d 
-    "{\"registration_ids\":[\"fyfUV30o3CU:APA91bFZMO-HJxoX-y-VbKnesMrEkd02Hk2cIkuIMR45QtJoy5jiD1mEaJgBkqWhP5Scq3pkbo2jGZRlpiYIAO6RXS2XNxmGKs1aAnj6hnCBwyXzLfLjozbXlvYBvJGtsF229pVyR1OY\"]}"
+curl --header "Authorization: key=AIzaSyAXdTTj4DSGfvm94BB66tXSH1OSRjL3UyQ" --header "Content-Type: application/json" https://android.googleapis.com/gcm/send -d "{\"registration_ids\":[\"fyfUV30o3CU:APA91bFZMO-HJxoX-y-VbKnesMrEkd02Hk2cIkuIMR45QtJoy5jiD1mEaJgBkqWhP5Scq3pkbo2jGZRlpiYIAO6RXS2XNxmGKs1aAnj6hnCBwyXzLfLjozbXlvYBvJGtsF229pVyR1OY\"]}"
 ```
 
 real push with parameters:
 
 ```
-curl --header "Authorization: key=AIzaSyDCCPu_DhK8QkgZ6kCU0xvQK6-YECC0Yzg" --header "Content-Type: application/json"
+curl --header "Authorization: key=AIzaSyAXdTTj4DSGfvm94BB66tXSH1OSRjL3UyQ" --header "Content-Type: application/json"
 https://android.googleapis.com/gcm/send -d  
 "{\"registration_ids\":[\"dgapK87n1oc:APA91bERPFkHTY0sYDpsoncFUFBwDqnFSFapXaSch-3prWOUy3IPcWAdP0YadzurJ8R0sSLObH_U4tsnToFVc6FDjjymjgsF9Xbts6ML8PFzuI0W2dLRgSWVM9fy5Z7DAA5TR_iUuZ9F\"], \"data\":{\"message\":\"You have 10 new jobs…..\", \"new_count\":3, \"context\":\"jobs\", \"id\": 6439443}}"
 ```
