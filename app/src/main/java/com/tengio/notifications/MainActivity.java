@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.tengio.cpn.CpnInAppReceiver;
 import com.tengio.cpn.CpnInAppListener;
+import com.tengio.cpn.CpnInAppReceiver;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         message = (TextView) findViewById(R.id.notification_message);
-
-        //TODO using this to register the
-        RegistrationService.start(this);
     }
 
     @Override

@@ -1,12 +1,13 @@
 package com.tengio.notifications;
 
+import com.google.firebase.messaging.RemoteMessage;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
 import com.tengio.cpn.CpnNotificationService;
@@ -14,7 +15,7 @@ import com.tengio.cpn.CpnNotificationService;
 public class NotificationService extends CpnNotificationService<PushNotification> {
 
     @Override
-    protected void sendNotification(PushNotification pushNotification) {
+    protected void showNotification(PushNotification pushNotification) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -33,8 +34,8 @@ public class NotificationService extends CpnNotificationService<PushNotification
     }
 
     @Override
-    protected PushNotification getPushObject(Bundle data) {
-        String message = data.getString("message");
+    protected PushNotification getPushObject(RemoteMessage remoteMessage) {
+        String message = remoteMessage.getData().get("message");
         return new PushNotification(message);
     }
 }

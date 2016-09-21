@@ -1,1 +1,1 @@
-include ':app', ':cpn'
+include ':app', ':library'
