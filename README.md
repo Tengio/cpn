@@ -103,7 +103,8 @@ public class RegistrationService extends CpnRegistrationService {
 ```
 
 Don't forget to add the registration service to the manifest
-```
+
+```xml
 <service android:name="com.tengio.notifications.RegistrationService">
     <intent-filter>
         <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
@@ -147,7 +148,7 @@ public class NotificationService extends CpnNotificationService<PushNotification
 ```
  
 Also you need to add it to the manifest:
-```
+```xml
 <service android:name="com.tengio.notifications.NotificationService">
     <intent-filter>
         <action android:name="com.google.firebase.MESSAGING_EVENT"/>
@@ -160,7 +161,7 @@ Consume Notification in while app running
 
 If you want to consume notifications while app is running in an activity you can easily do that:
 
-```
+```java
 private CpnInAppReceiver<PushNotification> cpnReceiver = new CpnInAppReceiver<>();
 
 @Override

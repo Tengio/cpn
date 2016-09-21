@@ -35,7 +35,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = 'maven'
-        name = 'cpn-google'
+        name = 'cpn'
         userOrg = 'tengioltd'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/Tengio/cpn.git'
