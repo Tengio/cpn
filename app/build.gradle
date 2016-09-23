@@ -47,9 +47,9 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.google.firebase:firebase-analytics:9.0.0'
-    compile 'com.google.firebase:firebase-crash:9.4.0'
-    compile 'com.google.firebase:firebase-messaging:9.4.0'
+    compile 'com.google.firebase:firebase-analytics:9.6.0'
+    compile 'com.google.firebase:firebase-crash:9.6.0'
+    compile 'com.google.firebase:firebase-messaging:9.6.0'
 
     testCompile 'junit:junit:4.12'
     compile project(path: ':library')
