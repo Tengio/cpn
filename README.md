@@ -10,7 +10,7 @@ Version
 
 [ ![Download](https://api.bintray.com/packages/tengioltd/maven/cpn/images/download.svg) ](https://bintray.com/tengioltd/maven/cpn/_latestVersion)
 
-Current version uses Firebase Cloud Messaging 9.4.0.
+Current version uses Firebase Cloud Messaging 9.6.0.
 
 Old GCM version can be see at [gcm tag](https://github.com/Tengio/cpn/tree/gcm).
 
@@ -19,6 +19,10 @@ Version will follows google play services version so that it is going to ve even
 
 Change Log:
 -----------
+
+9.6.0 :
+
+- Firebase dependency updated to 9.6.0
 
 9.4.0 :
 
