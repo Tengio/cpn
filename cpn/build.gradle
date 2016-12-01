@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-project.version = "10.0.0"
+project.version = "10.0.1"
 project.group = "com.tengio"
 
 android {
@@ -13,7 +13,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 5
-        versionName "10.0.0"
+        versionName "10.0.1"
     }
     buildTypes {
         release {
@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    compile 'com.google.firebase:firebase-messaging:10.0.0'
+    compile 'com.google.firebase:firebase-messaging:10.0.1'
 
     testCompile 'junit:junit:4.12'
 }
