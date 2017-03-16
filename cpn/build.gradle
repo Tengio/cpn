@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
+apply from: 'https://raw.githubusercontent.com/Tengio/tengio-bintray-script/master/bintray.gradle'
 
 project.version = "10.2.0"
 project.group = "com.tengio"
@@ -30,14 +30,8 @@ dependencies {
 }
 
 bintray {
-    user = BINTRAY_USER
-    key = BINTRAY_KEY
-    configurations = ['archives']
     pkg {
-        repo = 'maven'
         name = 'cpn'
-        userOrg = 'tengioltd'
-        licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/Tengio/cpn.git'
     }
 }
