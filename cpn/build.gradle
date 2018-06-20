@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply from: 'https://raw.githubusercontent.com/Tengio/tengio-bintray-script/master/bintray.gradle'
 
-project.version = "10.3.0"
+project.version = "10.4.0"
 project.group = "com.tengio"
 
 android {
@@ -13,7 +13,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 6
-        versionName "10.3.0"
+        versionName "10.4.0"
     }
     buildTypes {
         release {
