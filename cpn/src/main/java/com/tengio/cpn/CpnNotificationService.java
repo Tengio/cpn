@@ -1,11 +1,15 @@
 package com.tengio.cpn;
 
-import com.google.android.gms.gcm.GcmListenerService;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v4.content.LocalBroadcastManager;
+
+import com.google.android.gms.gcm.GcmListenerService;
 
 import java.io.Serializable;
 
@@ -30,6 +34,14 @@ public abstract class CpnNotificationService<T extends Serializable> extends Gcm
             return;
         }
         sendNotification(t);
+    }
+
+    public String getStringFrom(@StringRes int resString) {
+        return getString(resString);
+    }
+
+    public NotificationManager getNotificationManager(){
+        return (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     protected abstract void sendNotification(T data);

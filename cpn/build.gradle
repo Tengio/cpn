@@ -2,18 +2,18 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply from: 'https://raw.githubusercontent.com/Tengio/tengio-bintray-script/master/bintray.gradle'
 
-project.version = "10.2.0_gcm"
+project.version = "10.3.0_gcm"
 project.group = "com.tengio"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 2
-        versionName "10.2.0_gcm"
+        versionName "10.3.0_gcm"
     }
     buildTypes {
         release {
@@ -24,11 +24,9 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services-gcm:10.2.0'
-    compile 'com.google.firebase:firebase-core:10.2.0' //this to force firebase 9.2.1 instead of 9.0.0 coming with play
-    // services 3.0.0
-
-    testCompile 'junit:junit:4.12'
+    implementation 'com.google.android.gms:play-services-gcm:15.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    testImplementation 'junit:junit:4.12'
 }
 
 
