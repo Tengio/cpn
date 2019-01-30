@@ -15,6 +15,11 @@ import com.tengio.cpn.CpnNotificationService;
 public class NotificationService extends CpnNotificationService<PushNotification> {
 
     @Override
+    protected void onTokenReady(String token) {
+
+    }
+
+    @Override
     protected void showNotification(PushNotification pushNotification) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -35,7 +40,7 @@ public class NotificationService extends CpnNotificationService<PushNotification
 
     @Override
     protected PushNotification getPushObject(RemoteMessage remoteMessage) {
-        String message = remoteMessage.getData().get("message");
+        String message = remoteMessage.getNotification().getTitle();
         return new PushNotification(message);
     }
 }

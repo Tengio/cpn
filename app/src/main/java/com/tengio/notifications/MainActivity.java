@@ -2,8 +2,12 @@ package com.tengio.notifications;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.tengio.cpn.CpnInAppListener;
 import com.tengio.cpn.CpnInAppReceiver;
 
@@ -17,6 +21,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         message = (TextView) findViewById(R.id.notification_message);
+        /*FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String newToken = instanceIdResult.getToken();
+                Log.e("XXX",newToken);
+            }
+        });*/
     }
 
     @Override
@@ -25,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         cpnActivityReceiver.register(this, new CpnInAppListener<PushNotification>() {
             @Override
             public void onReceived(PushNotification notification) {
+                Log.e("XXX","Messgae is " + notification.getMessage());
                 message.setText(notification.getMessage());
             }
         });

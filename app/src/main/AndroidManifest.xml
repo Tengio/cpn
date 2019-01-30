@@ -19,12 +19,6 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.tengio.notifications.RegistrationService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
-
         <service android:name="com.tengio.notifications.NotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
