@@ -1,13 +1,20 @@
 package com.tengio.cpn;
 
-import com.google.firebase.messaging.FirebaseMessagingService;
-import com.google.firebase.messaging.RemoteMessage;
 
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.io.Serializable;
 
@@ -18,6 +25,31 @@ public abstract class CpnNotificationService<T extends Serializable> extends Fir
     public static final IntentFilter INTENT_FILTER = new IntentFilter(NOTIFICATION_RECEIVED);
 
     private static final String TOKEN = "push_token";
+
+    public CpnNotificationService(){
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                if (!task.isSuccessful()) {
+                    if (BuildConfig.DEBUG) {
+                        Log.w("CPN", "getInstanceId failed", task.getException());
+                    }
+                    return;
+                }
+                // Get new Instance ID token
+                InstanceIdResult token = task.getResult();
+                // Log and toast
+                if (token == null) {
+                    return;
+                }
+                onTokenReady(token.getToken());
+                if (BuildConfig.DEBUG) {
+                    Log.d("CPN", token.getToken());
+                }
+            }
+        });
+    }
 
     @Override
     public void onNewToken(String refreshedToken) {
