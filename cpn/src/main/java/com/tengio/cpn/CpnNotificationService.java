@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v4.content.LocalBroadcastManager;
+import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,8 +26,8 @@ public abstract class CpnNotificationService<T extends Serializable> extends Fir
 
     private static final String TOKEN = "push_token";
 
-    public CpnNotificationService(){
-
+    public CpnNotificationService() {
+        initialise();
         FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
             @Override
             public void onComplete(@NonNull Task<InstanceIdResult> task) {
@@ -41,9 +41,12 @@ public abstract class CpnNotificationService<T extends Serializable> extends Fir
                 InstanceIdResult token = task.getResult();
                 // Log and toast
                 if (token == null) {
+                    if (BuildConfig.DEBUG) {
+                        Log.d("CPN", "Token is null");
+                    }
                     return;
                 }
-                onTokenReady(token.getToken());
+                onNewToken(token.getToken());
                 if (BuildConfig.DEBUG) {
                     Log.d("CPN", token.getToken());
                 }
@@ -55,10 +58,21 @@ public abstract class CpnNotificationService<T extends Serializable> extends Fir
     public void onNewToken(String refreshedToken) {
         super.onNewToken(refreshedToken);
         SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
+        String token = getToken(preference);
+        if (token == null || !token.equals(refreshedToken)) {
+            saveToken(refreshedToken, preference);
+            onTokenReady(refreshedToken);
+        }
+    }
+
+    private String getToken(SharedPreferences preference) {
+        return preference.getString(TOKEN, null);
+    }
+
+    private void saveToken(String refreshedToken, SharedPreferences preference) {
         final SharedPreferences.Editor editor = preference.edit();
         editor.putString(TOKEN, refreshedToken);
         editor.apply();
-        onTokenReady(refreshedToken);
     }
 
     @Override
@@ -73,6 +87,10 @@ public abstract class CpnNotificationService<T extends Serializable> extends Fir
         }
         showNotification(t);
     }
+
+    protected abstract void initialise();
+
+    protected abstract void onTokenUpdate(String token);
 
     protected abstract void onTokenReady(String token);
 

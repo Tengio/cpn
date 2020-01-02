@@ -1,13 +1,10 @@
 package com.tengio.notifications;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.tengio.cpn.CpnInAppListener;
 import com.tengio.cpn.CpnInAppReceiver;
 

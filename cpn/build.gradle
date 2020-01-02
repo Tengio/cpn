@@ -2,18 +2,18 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply from: 'https://raw.githubusercontent.com/Tengio/tengio-bintray-script/master/bintray.gradle'
 
-project.version = "10.5.0"
+project.version = "12.0.3"
 project.group = "com.tengio"
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.2'
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 27
-        versionCode 6
-        versionName "10.5.0"
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 7
+        versionName "12.0.4"
     }
     buildTypes {
         release {
@@ -24,8 +24,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.firebase:firebase-core:16.0.6'
-    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
 
     testImplementation 'junit:junit:4.12'
 }
